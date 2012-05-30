@@ -14,7 +14,7 @@ apt-get -y install mysql-server
 
 #django
 cd /tmp
-wget http://www.djangoproject.com/download/1.4/tarball/
+wget --content-disposition http://www.djangoproject.com/download/1.4/tarball/
 tar xzvf Django-1.4.tar.gz
 cd Django-1.4
 python setup.py install
