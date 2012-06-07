@@ -160,9 +160,17 @@ check_root
 check_sudo
 check_ubuntu "all"
 
+# Remove a pre-existing log file.
+if [ -f $log ]; then
+    rm -f $log 2>/dev/null
+fi
+
 #nginx
 ncecho " [x] Installing nginx"
 apt-get -y install nginx  >> "$log" 2>&1 &
+pid=$!;progress $pid
+
+ncecho " [x] Repacing conf for nginx"
 rm -f /etc/nginx/nginx.conf >> "$log" 2>&1 &
 cp nginx.conf /etc/nginx/ >> "$log" 2>&1 &
 #cp virtual.conf /etc/nginx/conf.d/django.conf
