@@ -39,9 +39,9 @@ function progress() {
             retcode=$?
             echo "$pid's retcode: $retcode" >> "$log"
             if [[ $retcode = "0" ]] || [[ $retcode = "255" ]]; then
-                cecho " >>success<<"
+                cecho success
             else
-                cecho " >>failed<<"
+                cecho failed
                 echo -e " [i] Showing the last 5 lines from the logfile ($log)...";
                 tail -n5 "$log"
                 exit 1;
@@ -166,10 +166,38 @@ if [ -f $log ]; then
 fi
 
 #nginx
-ncecho " [x] Getting nginx source"
-wget http://nginx.org/download/nginx-1.2.3.tar.gz >> "$log" 2>&1 &
+ncecho " [x] Installing nginx"
+apt-get -y install nginx  >> "$log" 2>&1 &
 pid=$!;progress $pid
 
-ncecho " [x] Unpucking nginx"
-tar zxf nginx-1.2.3.tar.gz && rm -f nginx-1.2.3.tar.gz >> "$log" 2>&1 &
+ncecho " [x] Repacing conf for nginx"
+rm -f /etc/nginx/nginx.conf && cp nginx.conf /etc/nginx/ && cp fastcgi.conf /etc/nginx/django_fastcgi.conf>> "$log" 2>&1 &
+pid=$!;progress $pid
+
+#python
+ncecho " [x] Installing python modules"
+yum -y install python-setuptools python-devel python-flup python-sqlite2 python-mysqldb >> "$log" 2>&1 &
+easy_install MySQL-python >> "$log" 2>&1 &
+pid=$!;progress $pid
+
+#mysql
+ncecho " [x] Installing mysql"
+apt-get -y install mysql-server >> "$log" 2>&1 &
+pid=$!;progress $pid
+
+#django
+ncecho " [x] Getting django distr"
+cd /tmp && wget --content-disposition http://www.djangoproject.com/download/1.4.1/tarball/ >> "$log" 2>&1 &
+
+ncecho " [x] Unpucking django distr"
+tar xzf Django-1.4.1.tar.gz $$ rm -f Django-1.4.tar.gz >> "$log" 2>&1 &
+pid=$!;progress $pid
+
+ncecho " [x] Installing Django"
+cd Django-1.4 && >> python setup.py install >> "$log" 2>&1 &
+pid=$!;progress $pid
+
+#setup
+ncecho " [x] Adjust folder structure for django projects"
+mkdir /home/djangoprojects && cd /home/djangoprojects >> "$log" 2>&1 &
 pid=$!;progress $pid
