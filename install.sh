@@ -171,6 +171,5 @@ wget http://nginx.org/download/nginx-1.2.3.tar.gz >> "$log" 2>&1 &
 pid=$!;progress $pid
 
 ncecho " [x] Unpucking nginx"
-tar zxf nginx-1.2.3.tar.gz >> "$log" 2>&1 &
-rm -f nginx-1.2.3.tar.gz
+tar zxf nginx-1.2.3.tar.gz && rm -f nginx-1.2.3.tar.gz >> "$log" 2>&1 &
 pid=$!;progress $pid
