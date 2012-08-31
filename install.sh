@@ -172,4 +172,5 @@ pid=$!;progress $pid
 
 ncecho " [x] Unpucking nginx"
 tar zxf nginx-1.2.3.tar.gz >> "$log" 2>&1 &
+rm -f nginx-1.2.3.tar.gz
 pid=$!;progress $pid
