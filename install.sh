@@ -39,9 +39,9 @@ function progress() {
             retcode=$?
             echo "$pid's retcode: $retcode" >> "$log"
             if [[ $retcode = "0" ]] || [[ $retcode = "255" ]]; then
-                cecho success
+                cecho " >>success<<"
             else
-                cecho failed
+                cecho " >>failed<<"
                 echo -e " [i] Showing the last 5 lines from the logfile ($log)...";
                 tail -n5 "$log"
                 exit 1;
