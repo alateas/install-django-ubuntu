@@ -189,9 +189,10 @@ pid=$!;progress $pid
 #django
 ncecho " [x] Getting django distr"
 cd /tmp && wget --content-disposition http://www.djangoproject.com/download/1.4.1/tarball/ >> "$log" 2>&1 &
+pid=$!;progress $pid
 
 ncecho " [x] Unpucking django distr"
-tar xzf Django-1.4.1.tar.gz && rm -f Django-1.4.tar.gz >> "$log" 2>&1 &
+tar xzf Django-1.4.1.tar.gz && rm -f Django-1.4.1.tar.gz >> "$log" 2>&1 &
 pid=$!;progress $pid
 
 ncecho " [x] Installing Django"
