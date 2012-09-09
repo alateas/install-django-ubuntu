@@ -192,11 +192,15 @@ cd /tmp && wget --content-disposition http://www.djangoproject.com/download/1.4.
 pid=$!;progress $pid
 
 ncecho " [x] Unpucking django distr"
-tar xzf Django-1.4.1.tar.gz && rm -f Django-1.4.1.tar.gz >> "$log" 2>&1 &
+cd /tmp && tar xzf Django-1.4.1.tar.gz && rm -f Django-1.4.1.tar.gz >> "$log" 2>&1 &
 pid=$!;progress $pid
 
 ncecho " [x] Installing Django"
-cd Django-1.4 && python setup.py install >> "$log" 2>&1 &
+cd /tmp && cd Django-1.4.1 && python setup.py install >> "$log" 2>&1 &
+pid=$!;progress $pid
+
+ncecho " [x] Removing django source"
+cd /tmp && rm -rf Django-1.4.1 >> "$log" 2>&1 &
 pid=$!;progress $pid
 
 #setup
