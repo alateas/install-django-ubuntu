@@ -176,8 +176,7 @@ pid=$!;progress $pid
 
 #python
 ncecho " [x] Installing python modules"
-yum -y install python-setuptools python-devel python-flup python-sqlite2 python-mysqldb >> "$log" 2>&1 &
-easy_install MySQL-python >> "$log" 2>&1 &
+apt-get -y install python-setuptools python-dev python-flup python-sqlite python-mysqldb >> "$log" 2>&1 &
 pid=$!;progress $pid
 
 #mysql
@@ -192,11 +191,11 @@ ncecho " [x] Getting django distr"
 cd /tmp && wget --content-disposition http://www.djangoproject.com/download/1.4.1/tarball/ >> "$log" 2>&1 &
 
 ncecho " [x] Unpucking django distr"
-tar xzf Django-1.4.1.tar.gz $$ rm -f Django-1.4.tar.gz >> "$log" 2>&1 &
+tar xzf Django-1.4.1.tar.gz && rm -f Django-1.4.tar.gz >> "$log" 2>&1 &
 pid=$!;progress $pid
 
 ncecho " [x] Installing Django"
-cd Django-1.4 && >> python setup.py install >> "$log" 2>&1 &
+cd Django-1.4 && python setup.py install >> "$log" 2>&1 &
 pid=$!;progress $pid
 
 #setup
