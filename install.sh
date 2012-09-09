@@ -182,6 +182,8 @@ pid=$!;progress $pid
 
 #mysql
 ncecho " [x] Installing mysql"
+sudo debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password password mysqlzabbix'
+sudo debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password_again password mysqlzabbix'
 apt-get -y install mysql-server >> "$log" 2>&1 &
 pid=$!;progress $pid
 
