@@ -46,6 +46,20 @@ function check_ubuntu() {
     fi
 }
 
+function lsb() {
+    local CMD_LSB_RELEASE=`which lsb_release`
+    if [ "${CMD_LSB_RELEASE}" == "" ]; then
+        error_msg "ERROR! 'lsb_release' was not found. I can't identify your distribution."
+    fi
+    LSB_ID=`lsb_release -i | cut -f2 | sed 's/ //g'`
+    LSB_REL=`lsb_release -r | cut -f2 | sed 's/ //g'`
+    LSB_CODE=`lsb_release -c | cut -f2 | sed 's/ //g'`
+    LSB_DESC=`lsb_release -d | cut -f2`
+    LSB_ARCH=`dpkg --print-architecture`
+    LSB_MACH=`uname -m`
+    LSB_NUM=`echo ${LSB_REL} | sed s'/\.//g'`
+}
+
 # common ################################################################# END #
 
 #checks
