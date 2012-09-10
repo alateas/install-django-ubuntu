@@ -85,4 +85,5 @@ cd src
 rm -r settings.py
 echo ${SCRIPT_DIR}
 cat ${SCRIPT_DIR}/settings.py.tpl | sed -e "s/\*projectname\*/$1/" > settings.py
+cd ..
 python manage.py syncdb
