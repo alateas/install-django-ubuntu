@@ -176,7 +176,7 @@ pid=$!;progress $pid
 
 #python
 ncecho " [x] Installing python modules"
-apt-get -y install python-setuptools python-dev python-flup python-sqlite python-mysqldb >> "$log" 2>&1 &
+apt-get -y install python-setuptools python-dev python-flup python-mysqldb >> "$log" 2>&1 &
 pid=$!;progress $pid
 
 #mysql
