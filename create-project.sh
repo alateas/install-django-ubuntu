@@ -83,5 +83,6 @@ mkdir logs protected_media scripts tmp
 chmod 777 logs protected_media tmp
 cd src
 rm -r settings.py
-cat $SCRIPT_DIR/settings.py.tpl | sed -e "s/*projectname*/$1/" > settings.py
+echo ${SCRIPT_DIR}
+cat ${SCRIPT_DIR}/settings.py.tpl | sed -e "s/*projectname*/$1/" > settings.py
 python manage.py syncdb
