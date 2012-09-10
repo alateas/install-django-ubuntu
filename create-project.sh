@@ -73,10 +73,14 @@ then
     exit 1
 fi
 
+SCRIPT_DIR = "$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 cd /home/djangoprojects
 django-admin.py startproject $1
 cd $1
 mv $1 src
 mkdir logs protected_media scripts tmp
 chmod 777 logs protected_media tmp
+rm -r settings.py
+cat $SCRIPT_DIR/db_settings.py | sed -e "s/*projectname*/$1/" > settings.py
 python manage.py syncdb
