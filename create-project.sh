@@ -77,6 +77,6 @@ cd /home/djangoprojects
 django-admin.py startproject $1
 cd $1
 mv $1 src
-mkdir logs protected_media scripts
-chmod 777 logs protected_media
+mkdir logs protected_media scripts tmp
+chmod 777 logs protected_media tmp
 python manage.py syncdb
