@@ -79,7 +79,7 @@ cd /home/djangoprojects
 django-admin.py startproject $1
 cd $1
 mv $1 src
-mkdir logs protected_media scripts tmp
+mkdir logs protected_media scripts tmp src/media src/templates
 chmod 777 logs protected_media tmp
 cd src
 rm -r settings.py
