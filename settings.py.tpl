@@ -3,7 +3,6 @@ import os
 os.environ['PYTHON_EGG_CACHE'] = '/home/djangoprojects/*projectname*/tmp/python_eggs' 
 
 from db_settings import *
-from db_settings_asterisk import *
 DATABASES = {}
 DATABASES['default'] =  db_default
 #DATABASES['somedb'] = db_default.copy()
