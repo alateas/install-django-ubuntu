@@ -73,6 +73,15 @@ then
     exit 1
 fi
 
+if [ ! -n "$2" ] 
+then
+    echo 'Missed argument : mysql root password'
+    exit 1
+fi
+
+db_user = $1
+db_pass = $1[::-1]
+
 SCRIPT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 cd /home/djangoprojects

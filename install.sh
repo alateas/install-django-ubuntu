@@ -156,6 +156,12 @@ function apt_update() {
 # common ################################################################# END #
 
 #checks
+if [ ! -n "$1" ] 
+then
+    echo 'Missed argument : mysql root password'
+    exit 1
+fi
+
 check_root
 check_sudo
 check_ubuntu "all"
@@ -181,8 +187,8 @@ pid=$!;progress $pid
 
 #mysql
 ncecho " [x] Installing mysql"
-sudo debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password password mysqlzabbix'
-sudo debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password_again password mysqlzabbix'
+sudo debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password password $1"
+sudo debconf-set-selections <<< "mysql-server-5.5 mysql-server/root_password_again password $1"
 apt-get -y install mysql-server >> "$log" 2>&1 &
 pid=$!;progress $pid
 
