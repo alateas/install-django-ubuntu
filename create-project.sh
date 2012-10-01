@@ -95,9 +95,9 @@ EOFMYSQL
 
 SCRIPT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-cd /home/djangoprojects
+mkdir /home/djangoprojects/$1
+cd /home/djangoprojects/$1
 django-admin.py startproject $1
-cd $1
 mv $1 src
 mkdir logs protected_media scripts tmp src/media src/templates
 chmod 777 logs protected_media tmp
