@@ -106,5 +106,4 @@ rm -r settings.py
 echo ${SCRIPT_DIR}
 cat ${SCRIPT_DIR}/settings.py.tpl | sed -e "s/\<projectname\>/$1/" > settings.py
 cat ${SCRIPT_DIR}/db_settings.py.tpl | sed -e "s/\<db_user\>/$db_user/" | sed -e "s/\<db_name\>/$db_name/" | sed -e "s/\<db_pass\>/$db_pass/"  > db_settings.py
-cd ..
 python manage.py syncdb
