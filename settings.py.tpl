@@ -1,6 +1,6 @@
-# Django settings for *projectname* project.
+# Django settings for <projectname> project.
 import os 
-os.environ['PYTHON_EGG_CACHE'] = '/home/djangoprojects/*projectname*/tmp/python_eggs' 
+os.environ['PYTHON_EGG_CACHE'] = '/home/djangoprojects/<projectname>/tmp/python_eggs' 
 
 from db_settings import *
 DATABASES = {}
@@ -47,10 +47,10 @@ USE_TZ = True
 STATIC_ROOT = ''
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = '/home/djangoprojects/*projectname*/src/media'
+MEDIA_ROOT = '/home/djangoprojects/<projectname>/src/media'
 MEDIA_URL = '/m/'
 
-PROTECTED_MEDIA_ROOT = '/home/djangoprojects/*projectname*/protected_media'
+PROTECTED_MEDIA_ROOT = '/home/djangoprojects/<projectname>/protected_media'
 PROTECTED_MEDIA_URL = '/p/'
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'
@@ -89,7 +89,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    "/home/djangoprojects/*projectname*/src/templates",
+    "/home/djangoprojects/<projectname>/src/templates",
 )
 
 INSTALLED_APPS = (
