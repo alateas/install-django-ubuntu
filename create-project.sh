@@ -73,14 +73,29 @@ then
     exit 1
 fi
 
-if [ ! -n "$2" ] 
+if [ ! -n "$2" ]
 then
     echo 'Missed argument : mysql root password'
     exit 1
 fi
 
-db_user = $1
-db_pass = $1[::-1]
+db_user=$1
+db_name=${db_user}
+
+#generating reverse password (for example: if user is 'vasya', then password will be 'aysav')
+copy=${db_user}
+len=${#copy}
+for((i=$len-1;i>=0;i--)); do db_pass="$db_pass${copy:$i:1}"; done
+
+echo "user: $db_user, pass: $db_pass"
+
+
+#creating mysql database and user
+echo "GRANT ALL PRIVILEGES ON ${db_name}.* TO ${db_user}@localhost IDENTIFIED BY '${db_pass}' WITH GRANT OPTION;"
+mysql -uroot -p$2 << EOFMYSQL
+CREATE DATABASE ${db_name} CHARACTER SET utf8 COLLATE utf8_general_ci;
+GRANT ALL PRIVILEGES ON ${db_name}.* TO ${db_user}@localhost IDENTIFIED BY '${db_pass}';
+EOFMYSQL
 
 SCRIPT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
