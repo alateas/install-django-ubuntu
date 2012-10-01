@@ -87,11 +87,7 @@ copy=${db_user}
 len=${#copy}
 for((i=$len-1;i>=0;i--)); do db_pass="$db_pass${copy:$i:1}"; done
 
-echo "user: $db_user, pass: $db_pass"
-
-
 #creating mysql database and user
-echo "GRANT ALL PRIVILEGES ON ${db_name}.* TO ${db_user}@localhost IDENTIFIED BY '${db_pass}' WITH GRANT OPTION;"
 mysql -uroot -p$2 << EOFMYSQL
 CREATE DATABASE ${db_name} CHARACTER SET utf8 COLLATE utf8_general_ci;
 GRANT ALL PRIVILEGES ON ${db_name}.* TO ${db_user}@localhost IDENTIFIED BY '${db_pass}';
