@@ -112,7 +112,7 @@ rm -r settings.py
 cat ${SCRIPT_DIR}/settings.py.tpl | sed -e "s/<projectname>/$1/" > settings.py
 cat ${SCRIPT_DIR}/db_settings.py.tpl | sed -e "s/<db_user>/$db_user/" | sed -e "s/<db_name>/$db_name/" | sed -e "s/<db_pass>/$db_pass/"  > db_settings.py
 cd ..
-cat ${SCRIPT_DIR}/runfastcgi.py.tpl | sed -e "s/<projectname>/$1/" > scripts/runfastcgi.sh
+cat ${SCRIPT_DIR}/runfastcgi.sh.tpl | sed -e "s/<projectname>/$1/" > scripts/runfastcgi.sh
 python manage.py syncdb
 
 #adding new virual host to nginx
