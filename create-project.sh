@@ -79,8 +79,9 @@ then
     exit 1
 fi
 
+#username and database name same as project name
 db_user=$1
-db_name=${db_user}
+db_name=$1
 
 #generating reverse password for mysql user (for example: if user is 'vasya', then password will be 'aysav')
 copy=${db_user}
@@ -95,18 +96,24 @@ EOFMYSQL
 
 SCRIPT_DIR="$( cd -P "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+#creating project cstructure
 mkdir /home/djangoprojects/$1
 cd /home/djangoprojects/$1
 django-admin.py startproject src
 mv src/src/* src/
 mv src/manage.py ./
 rm -rf src/src/
-
 mkdir logs protected_media scripts tmp src/media src/templates
 chmod 777 logs protected_media tmp
 cd src
+
+#creating project-specific settings
 rm -r settings.py
 cat ${SCRIPT_DIR}/settings.py.tpl | sed -e "s/<projectname>/$1/" > settings.py
 cat ${SCRIPT_DIR}/db_settings.py.tpl | sed -e "s/<db_user>/$db_user/" | sed -e "s/<db_name>/$db_name/" | sed -e "s/<db_pass>/$db_pass/"  > db_settings.py
 cd ..
 python manage.py syncdb
+
+#adding new virual host to nginx
+cat ${SCRIPT_DIR}/virtual.conf | sed -e "s/<projectname>/$1/" > /etc/nginx/sites-available/$1
+ln -s /etc/nginx/sites-available/$1 /etc/nginx/sites-enabled/$1
