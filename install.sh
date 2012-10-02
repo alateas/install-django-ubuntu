@@ -177,7 +177,7 @@ apt-get -y install nginx  >> "$log" 2>&1 &
 pid=$!;progress $pid
 
 ncecho " [x] Repacing conf for nginx"
-rm -f /etc/nginx/nginx.conf && cp nginx.conf /etc/nginx/ && cp fastcgi.conf /etc/nginx/django_fastcgi.conf>> "$log" 2>&1 &
+mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.default && cp nginx.conf /etc/nginx/ && cp fastcgi.conf /etc/nginx/django_fastcgi.conf>> "$log" 2>&1 &
 pid=$!;progress $pid
 
 #python
