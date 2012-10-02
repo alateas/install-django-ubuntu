@@ -1,0 +1,1 @@
+python /home/djangoprojects/<projectname>/manage.py runfcgi outlog='/home/djangoprojects/<projectname>/logs/fastcgi_out.log' errlog='/home/djangoprojects/<projectname>/logs/fastcgi_err.log' pidfile='/home/djangoprojects/<projectname>/tmp/fastcgi_pid' host=127.0.0.1 port=7778
