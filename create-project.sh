@@ -82,7 +82,7 @@ fi
 db_user=$1
 db_name=${db_user}
 
-#generating reverse password (for example: if user is 'vasya', then password will be 'aysav')
+#generating reverse password for mysql user (for example: if user is 'vasya', then password will be 'aysav')
 copy=${db_user}
 len=${#copy}
 for((i=$len-1;i>=0;i--)); do db_pass="$db_pass${copy:$i:1}"; done
