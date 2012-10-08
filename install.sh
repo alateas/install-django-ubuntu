@@ -171,6 +171,11 @@ if [ -f $log ]; then
     rm -f $log 2>/dev/null
 fi
 
+#apt-get
+ncecho " [x] Updating apt repositories"
+apt-get update  >> "$log" 2>&1 &
+pid=$!;progress $pid
+
 #nginx
 ncecho " [x] Installing nginx"
 apt-get -y install nginx  >> "$log" 2>&1 &
